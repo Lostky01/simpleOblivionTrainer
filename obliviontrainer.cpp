@@ -70,7 +70,7 @@ int main()
 
 	DWORD processId = GetProcessId(L"Oblivion.exe");
 	if (processId == 0) {
-		cout << "[ERROR] Oblivion.exe is not running! Open the game first.\n";
+		cout << "ERROR! Oblivion.exe is not running! Open the game first.\n";
 		system("pause");
 		return 1;
 	}
@@ -81,7 +81,7 @@ int main()
 
 	HANDLE processHandle = OpenProcess(accessRights, FALSE, processId);
 	if (processHandle == NULL) {
-		cout << "Failed to open process because" << GetLastError() << endl;
+		cout << "Failed to open process. error code " << GetLastError() << endl;
 		system("pause");
 		return 1;
 	}
@@ -93,7 +93,7 @@ int main()
 	uintptr_t instructionAddress = ExternalAOBScan(processHandle, goldAOB, goldMask);
 
 	if (instructionAddress == 0) {
-		cout << "[ERROR] Could not find the instruction address!" << endl;
+		cout << "ERROR! Could not find the instruction address!" << endl;
 		system("pause");
 		CloseHandle(processHandle);
 		return 1;
